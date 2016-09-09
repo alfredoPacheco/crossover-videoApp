@@ -1,0 +1,1 @@
+<button class="playbackValue iconButton" ng-click="onClickPlayback()">{{playback}}x</button>

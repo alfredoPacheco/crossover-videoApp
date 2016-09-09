@@ -20,12 +20,15 @@ angular.module('videosApp').factory('authInterceptorService', function($q, $loca
                     switch (config.url) {
                         case appConfig.API_URL + '/videos':
                             config.params.sessionId = authData.sessionId;
+                        default:
+                            config.params = {};
                             break;
                     }
                 case 'POST':
                     config.params.sessionId = authData.sessionId;
                     break;
                 default:
+                    config.params = {};
                     break;
             }
         }

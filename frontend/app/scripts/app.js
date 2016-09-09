@@ -15,7 +15,9 @@ angular.module('videosApp', [
     'ngActivityIndicator',
     'LocalStorageModule',
     'infinite-scroll',
-    'angular-md5'
+    'angular-md5',
+    'com.2fdevs.videogular',
+    'com.2fdevs.videogular.plugins.controls'
 ], function($httpProvider) {
     // $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
     // $httpProvider.defaults.headers.put['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';

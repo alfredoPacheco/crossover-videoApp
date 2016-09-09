@@ -29,6 +29,8 @@ module.exports = function(config) {
       'bower_components/ngActivityIndicator/ngActivityIndicator.js',
       'bower_components/angular-local-storage/dist/angular-local-storage.js',
       'bower_components/angular-md5/angular-md5.js',
+      'bower_components/videogular/videogular.js',
+      'bower_components/videogular-controls/vg-controls.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',

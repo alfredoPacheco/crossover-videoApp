@@ -1,0 +1,4 @@
+<div class="vg-thumbnails" ng-show="thumbnails" ng-style="thumbnailContainer">
+<div class="image-thumbnail" ng-style="thumbnails"></div>
+</div>
+<div class="background"></div>

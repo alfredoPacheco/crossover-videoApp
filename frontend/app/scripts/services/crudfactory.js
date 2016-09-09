@@ -739,10 +739,10 @@ angular.module('videosApp').factory('crudFactory', function($http, $q, appConfig
                         } else {
                             if (angular.isArray(backendResponse.data)) {
                                 for (var i = 0; i < backendResponse.data.length; i++) {
-                                    mainEntity.adapterIn(backendResponse.data[i]);
+                                    _populateCatalogValues(_adapter(backendResponse.data[i], _self));
                                 }
                             } else {
-                                mainEntity.adapterIn(backendResponse.data);
+                                _populateCatalogValues(_adapter(backendResponse.data, _self));
                             }
                             deferred.resolve(backendResponse.data);
                         }
