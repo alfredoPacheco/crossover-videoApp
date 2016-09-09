@@ -8,5 +8,5 @@
  * Constant in the videosApp.
  */
 angular.module('videosApp').constant('appConfig', {
-	API_URL: 'http://localhost:3000/'
+	API_URL: 'http://localhost:3000'
 });

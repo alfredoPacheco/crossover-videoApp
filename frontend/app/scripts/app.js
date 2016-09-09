@@ -14,20 +14,27 @@ angular.module('videosApp', [
     'ngTouch',
     'ngActivityIndicator',
     'LocalStorageModule',
-    'infinite-scroll'
-]).config(function($routeProvider) {
+    'infinite-scroll',
+    'angular-md5'
+], function($httpProvider) {
+    // $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
+    // $httpProvider.defaults.headers.put['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
+}).config(function($routeProvider, $httpProvider) {
     $routeProvider
         .when('/', {
             templateUrl: 'views/main.html',
             controller: 'MainCtrl',
             controllerAs: 'main'
         })
-        .when('/about', {
-            templateUrl: 'views/about.html',
-            controller: 'AboutCtrl',
-            controllerAs: 'about'
+        .when('/login', {
+            templateUrl: 'views/login.html',
+            controller: 'LoginCtrl',
+            controllerAs: 'loginn'
         })
         .otherwise({
             redirectTo: '/'
         });
+
+    $httpProvider.interceptors.push('authInterceptorService');
+
 });

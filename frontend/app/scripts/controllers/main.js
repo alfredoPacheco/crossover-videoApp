@@ -9,7 +9,12 @@
  */
 angular.module('videosApp').controller('MainCtrl', function($scope, videoService) {
     $scope.videoList = [];
+    var infiniteScrollAdd = 10;
     $scope.retrieveVideos = function() {
-        $scope.videoList.push({name:'hi'});
+
+        videoService.customGet('videos?limit=' + infiniteScrollAdd).then(function(data) {
+            $scope.videoList = data;
+            infiniteScrollAdd += 1;
+        });
     }
 });

@@ -302,8 +302,8 @@ angular.module('videosApp').factory('crudFactory', function($http, $q, appConfig
                             if (typeof response.data === 'object') {
                                 var backendResponse = response.data;
                                 if (!backendResponse.ErrorThrown) {
-                                    _populateCatalogValues(_adapter(backendResponse.Result, _self));
-                                    angular.copy(backendResponse.Result, theEntity);
+                                    _populateCatalogValues(_adapter(backendResponse.data, _self));
+                                    angular.copy(backendResponse.data, theEntity);
                                     if (angular.isArray(theArrayBelonging)) {
                                         var theEntityCopy = angular.copy(theEntity);
                                         _arrAllRecords.push(theEntityCopy);
@@ -483,27 +483,27 @@ angular.module('videosApp').factory('crudFactory', function($http, $q, appConfig
                 $http.get(appConfig.API_URL + mainEntity.entityName + '/' + id + qParams + '&noCache=' + Number(new Date()))
                     .success(function(data) {
                         var backendResponse = data;
-                        if (backendResponse.ErrorThrown) {
+                        if (backendResponse.status == 'error') {
                             var alertifyContent = '<div style="word-wrap: break-word;">' + backendResponse.ResponseDescription + '</div>';
                             alertify.alert(alertifyContent).set('modal', true);
                             log.debug(data);
                             deferred.reject(data);
                         } else {
-                            mainEntity.adapterIn(backendResponse.Result);
-                            var oEntity = _getById(backendResponse.Result.id);
+                            mainEntity.adapterIn(backendResponse.data);
+                            var oEntity = _getById(backendResponse.data.id);
                             if (oEntity) { //Already exists, lets updated it.
-                                angular.copy(backendResponse.Result, oEntity);
+                                angular.copy(backendResponse.data, oEntity);
                             } else { //First time loaded, lets add it.
-                                _arrAllRecords.push(backendResponse.Result);
+                                _arrAllRecords.push(backendResponse.data);
                             }
-                            deferred.resolve(backendResponse.Result);
+                            deferred.resolve(backendResponse.data);
                         }
                     })
                     .error(function(data) {
                         // something went wrong
                         alertify.alert(data).set('modal', true);
                         log.debug(data);
-                        deferred.reject(backendResponse.Result);
+                        deferred.reject(backendResponse.data);
                     });
             } else {
                 deferred.reject();
@@ -528,13 +528,13 @@ angular.module('videosApp').factory('crudFactory', function($http, $q, appConfig
                 $http.get(appConfig.API_URL + mainEntity.entityName + '?noCache=' + Number(new Date()))
                     .success(function(data) {
                         var backendResponse = data;
-                        if (backendResponse.ErrorThrown) {
+                        if (backendResponse.status == 'error') {
                             var alertifyContent = '<div style="word-wrap: break-word;">' + backendResponse.ResponseDescription + '</div>';
                             alertify.alert(alertifyContent).set('modal', true);
                             log.debug(data);
                             deferred.reject(data);
                         } else {
-                            _arrAllRecords = backendResponse.Result;
+                            _arrAllRecords = backendResponse.data;
                             for (var i = 0; i < _arrAllRecords.length; i++) {
                                 mainEntity.adapterIn(_arrAllRecords[i]);
                             };
@@ -573,7 +573,7 @@ angular.module('videosApp').factory('crudFactory', function($http, $q, appConfig
                     $http.get(appConfig.API_URL + mainEntity.entityName + '/getCatalogs' + '?noCache=' + Number(new Date()))
                         .success(function(data) {
                             var backendResponse = data;
-                            if (backendResponse.ErrorThrown) {
+                            if (backendResponse.status == 'error') {
                                 var alertifyContent = '<div style="word-wrap: break-word;">' + backendResponse.ResponseDescription + '</div>';
                                 alertify.alert(alertifyContent).set('modal', true);
                                 log.debug(response);
@@ -581,7 +581,7 @@ angular.module('videosApp').factory('crudFactory', function($http, $q, appConfig
                             } else {
                                 for (var catalog in _catalogs) {
                                     if (_catalogs.hasOwnProperty(catalog)) {
-                                        _catalogs[catalog]._arrAllRecords = backendResponse.Result[catalog];
+                                        _catalogs[catalog]._arrAllRecords = backendResponse.data[catalog];
                                     }
                                 }
                                 _loadCatalogsExecuted = true;
@@ -636,16 +636,16 @@ angular.module('videosApp').factory('crudFactory', function($http, $q, appConfig
                     /*success*/
                     function(response) {
                         var backendResponse = response.data;
-                        if (backendResponse.ErrorThrown) {
+                        if (backendResponse.status == 'error') {
                             var alertifyContent = '<div style="word-wrap: break-word;">' + backendResponse.ResponseDescription + '</div>';
                             alertify.alert(alertifyContent).set('modal', true);
                             deferred.reject(response);
                         } else {
-                            for (var i = 0; i < backendResponse.Result.length; i++) {
-                                mainEntity.adapterIn(backendResponse.Result[i]);
+                            for (var i = 0; i < backendResponse.data.length; i++) {
+                                mainEntity.adapterIn(backendResponse.data[i]);
                             }
-                            _arrAllRecords = backendResponse.Result;
-                            deferred.resolve(backendResponse.Result);
+                            _arrAllRecords = backendResponse.data;
+                            deferred.resolve(backendResponse.data);
                         }
                     },
                     /*error*/
@@ -666,21 +666,21 @@ angular.module('videosApp').factory('crudFactory', function($http, $q, appConfig
                     /*success*/
                     function(response) {
                         var backendResponse = response.data;
-                        if (backendResponse.ErrorThrown) {
+                        if (backendResponse.status == 'error') {
                             var alertifyContent = '<div style="word-wrap: break-word;">' + backendResponse.ResponseDescription + '</div>';
                             alertify.alert(alertifyContent).set('modal', true);
                             deferred.reject(response);
                         } else {
-                            if (backendResponse.Result != null) {
-                                mainEntity.adapterIn(backendResponse.Result);
-                                var oEntity = _getById(backendResponse.Result.id);
+                            if (backendResponse.data != null) {
+                                mainEntity.adapterIn(backendResponse.data);
+                                var oEntity = _getById(backendResponse.data.id);
                                 if (oEntity) { //Already exists, lets updated it.
-                                    angular.copy(backendResponse.Result, oEntity);
+                                    angular.copy(backendResponse.data, oEntity);
                                 } else { //First time loaded, lets add it.
-                                    _arrAllRecords.push(backendResponse.Result);
+                                    _arrAllRecords.push(backendResponse.data);
                                 }
                             }
-                            deferred.resolve(backendResponse.Result);
+                            deferred.resolve(backendResponse.data);
                         }
                     },
                     /*error*/
@@ -700,12 +700,12 @@ angular.module('videosApp').factory('crudFactory', function($http, $q, appConfig
                 .then(function(response) {
                     if (typeof response.data === 'object') {
                         var backendResponse = response.data;
-                        if (backendResponse.ErrorThrown) {
+                        if (backendResponse.status == 'error') {
                             alertify.error(backendResponse.ResponseDescription);
                             log.debug(response);
                             deferred.reject(backendResponse);
                         } else {
-                            deferred.resolve(backendResponse.Result);
+                            deferred.resolve(backendResponse.data);
                         }
                     } else {
                         // invalid response
@@ -731,20 +731,20 @@ angular.module('videosApp').factory('crudFactory', function($http, $q, appConfig
                 .then(function(response) {
                     if (typeof response.data === 'object') {
                         var backendResponse = response.data;
-                        if (backendResponse.ErrorThrown) {
+                        if (backendResponse.status == 'error') {
                             var alertifyContent = '<div style="word-wrap: break-word;">' + backendResponse.ResponseDescription + '</div>';
                             alertify.alert(alertifyContent).set('modal', true);
                             log.debug(response);
                             deferred.reject(backendResponse);
                         } else {
-                            if (angular.isArray(backendResponse.Result)) {
-                                for (var i = 0; i < backendResponse.Result.length; i++) {
-                                    mainEntity.adapterIn(backendResponse.Result[i]);
+                            if (angular.isArray(backendResponse.data)) {
+                                for (var i = 0; i < backendResponse.data.length; i++) {
+                                    mainEntity.adapterIn(backendResponse.data[i]);
                                 }
                             } else {
-                                mainEntity.adapterIn(backendResponse.Result);
+                                mainEntity.adapterIn(backendResponse.data);
                             }
-                            deferred.resolve(backendResponse.Result);
+                            deferred.resolve(backendResponse.data);
                         }
                     } else {
                         // invalid response
@@ -768,7 +768,7 @@ angular.module('videosApp').factory('crudFactory', function($http, $q, appConfig
                 .then(function(response) {
                     if (typeof response.data === 'object') {
                         var backendResponse = response.data;
-                        if (backendResponse.ErrorThrown) {
+                        if (backendResponse.status == 'error') {
                             var alertifyContent = '<div style="word-wrap: break-word;">' + backendResponse.ResponseDescription + '</div>';
                             alertify.alert(alertifyContent).set('modal', true);
                             log.debug(response);
@@ -782,7 +782,7 @@ angular.module('videosApp').factory('crudFactory', function($http, $q, appConfig
                             $timeout(function() {
                                 alertify.success(backendResponse.ResponseDescription);
                             });
-                            deferred.resolve(backendResponse.Result);
+                            deferred.resolve(backendResponse.data);
                         }
                     } else {
                         // invalid response
@@ -825,7 +825,7 @@ angular.module('videosApp').factory('crudFactory', function($http, $q, appConfig
                 .then(function(response) {
                     if (typeof response.data === 'object') {
                         var backendResponse = response.data;
-                        if (backendResponse.ErrorThrown) {
+                        if (backendResponse.status == 'error') {
                             log.debug(backendResponse);
                             deferred.reject(backendResponse);
                         } else {
@@ -842,7 +842,7 @@ angular.module('videosApp').factory('crudFactory', function($http, $q, appConfig
                             $timeout(function() {
                                 alertify.success(backendResponse.ResponseDescription);
                             });
-                            deferred.resolve(backendResponse.Result);
+                            deferred.resolve(backendResponse.data);
                         }
                     } else {
                         // invalid response
@@ -866,12 +866,12 @@ angular.module('videosApp').factory('crudFactory', function($http, $q, appConfig
                 .then(function(response) {
                     if (typeof response.data === 'object') {
                         var backendResponse = response.data;
-                        if (backendResponse.ErrorThrown) {
+                        if (backendResponse.status == 'error') {
                             log.debug(backendResponse);
                             deferred.reject(backendResponse);
                         } else {
-                            backendResponse.Result.EF_State = 1; //Adding
-                            deferred.resolve(backendResponse.Result);
+                            backendResponse.data.EF_State = 1; //Adding
+                            deferred.resolve(backendResponse.data);
                         }
                     } else {
                         // invalid response
@@ -898,7 +898,7 @@ angular.module('videosApp').factory('crudFactory', function($http, $q, appConfig
                         if (typeof response.data === 'object') {
                             var backendResponse = response.data;
                             if (!backendResponse.ErrorThrown) {
-                                deferred.resolve(backendResponse.Result);
+                                deferred.resolve(backendResponse.data);
                             } else {
                                 var alertifyContent = '<div style="word-wrap: break-word;">' + backendResponse.ResponseDescription + '</div>';
                                 alertify.alert(alertifyContent).set('modal', true);
