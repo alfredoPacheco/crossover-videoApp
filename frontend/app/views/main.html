@@ -1,0 +1,13 @@
+<div class="VideoList">
+    <div class="container">
+        <div class="well text-center" hide-when-loading="isLoading" ng-if="!baseList || baseList.length == 0">
+            Empty List
+        </div>
+    </div>
+    <div infinite-scroll="retrieveVideos()" infinite-scroll-distance="3"></div>
+    <ul>
+    	<li ng-repeat="video in videoList">
+    		{{video}}
+    	</li>
+    </ul>
+</div>

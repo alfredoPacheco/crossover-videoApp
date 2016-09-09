@@ -7,11 +7,9 @@
  * # MainCtrl
  * Controller of the videosApp
  */
-angular.module('videosApp')
-  .controller('MainCtrl', function () {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
-  });
+angular.module('videosApp').controller('MainCtrl', function($scope, videoService) {
+    $scope.videoList = [];
+    $scope.retrieveVideos = function() {
+        $scope.videoList.push({name:'hi'});
+    }
+});
