@@ -1,0 +1,150 @@
+Functional Requirements:
+ ✔ Develop a single page application by using one of the allowed MVV* frameworks. @done (16-09-10 15:27)
+ ☐ Design the UI, which should be motivated by the provided visuals.
+ ☐ Implement user authentication. The content of this application should not be visible to public.
+ ✔ User should be able to see video listings on index page. Only first 10 videos should be loaded initially. @done (16-09-10 15:27)
+ ✔ Lazy loading should be implemented i.e. More videos should appear as the user scrolls down the listing. @done (16-09-10 15:27)
+ ☐ Users should not be able to play more than 1 video simultaneously. Playing a video should pause all other videos.
+ ✔ Users should be able to rate videos, an overall rating for each video should also be displayed. @done (16-09-10 15:28)
+ ✔ Users should be able to open the video details page by clicking on video title. @done (16-09-10 15:28)
+ ✔ REST API should be consumed. @done (16-09-10 15:28)
+ ☐ Unit tests with at least 50% code coverage should be provided.
+
+
+Non-Functional Requirements:
+ ✔ Code should be well documented by comments. @done (16-09-10 15:28)
+ ✔ Exception handling should be done, where necessary. @done (16-09-10 15:28)
+ ✔ Code should be well organized into files and folders. @done (16-09-10 15:28)
+ ✔ UI design should be clean and polished. @done (16-09-10 15:28)
+ ☐ CSS animations should be used to make the application more appealing.
+ ☐ UI should be cross-browser compatible.
+ ☐ UI should be cross-device compatible.
+
+
+Backend:
+  ✔ Download the backend code from this link. @done (16-09-10 15:29)
+  ✔ MongoDb should be running. @done (16-09-10 15:29)
+  ✔ Update the DB details in config.js @done (16-09-10 15:29)
+  ✔ Run ‘npm install’ to download npm packages. @done (16-09-10 15:29)
+  ✔ Run ‘npm start’ to start the backend API. @done (16-09-10 15:30)
+  ✔ By Default the backend will start web server on http://localhost:3000/ @done (16-09-10 15:30)
+  ☐ Backend is designed to serve your client code. Simply copy your code inside the client folder, and your app would be accessible at root ’/ ‘ (with default configuration the URL will be http://localhost:3000/)
+
+
+    ✔ Authenticate: @done (16-09-10 15:31)
+      In Initial setup only three users are created - “ali”, “tom” and “harry” with password “password” for all.
+      This API call is used to authenticate the user to enter the application.
+      JSON object with with following attribute needs to be sent in Request:
+        username.
+        MD5 encrypted password.
+      JSON object with Status, Session ID and username  is returned in Response
+      URL: http://localhost:3000/user/auth
+      Method: POST
+      Examples:
+        Input:
+        {"username":"ali", "password":"5f4dcc3b5aa765d61d8327deb882cf99"}
+      Response:
+        {"status":"success","sessionId":"a8t9Rr9bjWD2InfeFLbNS3FNg5mnFqiV","username":"ali"}
+        sessionId is to be sent with each request after login.
+
+
+    ☐ Logout:
+      This API call is used to logout the user from application.
+      Query string should contain the following parameters:
+        sessionId
+      JSON object with Status is returned in Response.
+      URL: http://localhost:3000/user/logout
+      Method: GET
+      Examples:
+        Request URL:
+        http://localhost:3000/user/logout?sessionId=CLr7NWvDvdyy1h9Uhtce0CaO4lL09d0z
+        Response: 
+          {"status":"success"}
+
+
+    ✔ Get Video Listings: @done (16-09-10 15:32)
+      This API call is used to get the video listings.
+      Query string should contain the following parameters:
+        sessionId
+        skip [optional] (number of records to skip from start)
+        limit [optional] (number of records to fetch)
+      JSON object with status and videos data is returned in Response.
+      URL: http://localhost:3000/videos
+      Method: GET
+      Examples:
+        Request URL: 
+        http://localhost:3000/videos?sessionId=qOhmSmXoLuFv6g1YvvXOU4UJ2nuI11jA&skip=1&limit=1 
+      Response:
+        {"status":"success","data":[{"_id":"5757e6e41b0a244b256ac1d5","name":"[1] Google Cardboard Assembly","description":"Google Cardboard Assembly Step by Step Instructions [HD]","url":"videos/Google_Cardboard_Assembly.mp4","ratings":[4,5,5,5,3,5,4,5]}]}
+
+
+
+    ☐ Get Single Video:
+      This API call is used to get details of a single video.
+      Query string should contain the following parameters:
+        sessionId
+        videoId
+      JSON object with status and video data is returned in Response.
+      URL: http://localhost:3000/video  
+      Method: GET
+      Examples:
+        Request URL: 
+        http://localhost:3000/video?sessionId=CqqAfowuZLzXHyViPaYzzyOU3dGPCFaG&videoId=5757e6e41b0a244b256ac1d5 
+      Response: 
+        {"status":"success","data":{"_id":"5757e6e41b0a244b256ac1d5","name":"[1] Google Cardboard Assembly","description":"Google Cardboard Assembly Step by Step Instructions [HD]","url":"videos/Google_Cardboard_Assembly.mp4","ratings":[4,5,5,5,3,5,4,5]}}
+
+
+
+    ✔ Rate Video: @done (16-09-10 15:33)
+      This API call is used to add user rating to a single video.
+      Query string should contain the following parameters:
+        sessionId
+      JSON object with with following attribute needs to be sent in Request:
+        videoid.
+        rating. (ranges from 1 to 5)
+      JSON object with status and video data is returned in Response.
+      URL: http://localhost:3000/video/ratings
+      Method: POST
+      Examples:
+        Request URL: 
+        http://localhost:3000/video/ratings?sessionId=CqqAfowuZLzXHyViPaYzzyOU3dGPCFaG 
+        Input:
+          {"videoId":"5757e6e41b0a244b256ac1d7","rating":"5"}
+        Response:
+          {"status":"success","data":{"_id":"5757e6e41b0a244b256ac1d7","name":"[3] How does Node.js work","description":"New to Node.js? Check out this video that explains \"How does Node work?\"","url":"videos/How_does_Node.js_work.mp4","ratings":[3,3,5]}}
+
+
+
+
+
+To be evaluated :
+  ✔ The quality of your output.  @done (16-09-10 15:33)
+    ✔ Code Modularisation @done (16-09-10 15:33)
+    ✔ Code quality @done (16-09-10 15:33)
+    ✔ Documentations @done (16-09-10 15:33)
+    ✔ Best Practices of Technology Applied (MV* JS framework mandatory) @done (16-09-10 15:33)
+  ☐ User Interface of App
+    ✔ Easy to use @done (16-09-10 15:33)
+    ✔ Attractive @done (16-09-10 15:33)
+    ✔ UI responsiveness from Mobile to tablet to desktop. @done (16-09-10 15:33)
+    ☐ Cross-Browser Compatible (IE+10 is sufficient)
+    ☐ Creativity in applying interactivity particularly in animation
+  ☐ Requirement Fulfillment. 
+  ☐ Recorded Demo (mandatory)
+  
+
+
+Delivery / What to submit:
+  Please, read and follow this section carefully. Any delivery that does not follow this section will score much less or simply won't be evaluated. Verify all the files and folders before submission, any missing file or folder might result in less scores.
+  Delivery for this assignment should consist of:
+    ☐ Archive named <your_name-Javascript Architect>.zip containing the following
+      ☐ README.txt -> containing report about work done and how to run your application.
+      ☐ Wink Folder -> Wink video(s) shows you application running, and perform required functionality (You can use any recording application if you couldn't use wink).
+      ☐ Code Folder -> contains your Code & unit tests. 
+    ☐ Check that the size of the archive is less than 250MB. If not, reduce the size of the demo video by removing similar frames and remove the dependencies.
+
+
+ATTENTION! YOUR APPLICATION WILL BE REJECTED IF IT:
+  ☐ Does not compile
+  ☐ Does not contain unit tests
+  ☐ Unit tests are failing
