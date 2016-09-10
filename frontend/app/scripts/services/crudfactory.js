@@ -696,7 +696,7 @@ angular.module('videosApp').factory('crudFactory', function($http, $q, appConfig
         var _customPost = function(sCustomMethod, oData) {
             var deferred = $q.defer();
 
-            $http.post(appConfig.API_URL + mainEntity.entityName + '/' + sCustomMethod, '=' + escape(JSON.stringify(oData)))
+            $http.post(appConfig.API_URL + mainEntity.entityName + '/' + sCustomMethod, JSON.stringify(oData))
                 .then(function(response) {
                     if (typeof response.data === 'object') {
                         var backendResponse = response.data;

@@ -23,7 +23,7 @@ angular.module('videosApp').service('videoService', function(crudFactory, $sce, 
                 plugins: {
 
                 }
-            }
+            };
         },
         adapterOut: function() {
 

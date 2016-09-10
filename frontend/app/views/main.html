@@ -9,7 +9,7 @@
             <div class="col-sm-4 col-lg-3" ng-repeat="video in videoList">
                 <div class="list-group">
                     <div class="list-group-item">
-                        <video-directive-readonly ng-click="openModalVideo(video);"></video-directive-readonly>
+                        <video-directive-readonly video="video" ng-click="openModalVideo(video);"></video-directive-readonly>
                     </div>
                 </div>
             </div>
@@ -21,18 +21,18 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">{{video.name}}</h4>
+                <h4 class="modal-title">{{modalVideo.name}}</h4>
             </div>
             <div class="modal-body">
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-sm-6">
-                            <video-directive></video-directive>
+                            <video-directive video="modalVideo"></video-directive>
                         </div>
                         <div class="col-sm-6">
                             <div>RATE</div>
                             <div class="VideoDescription">
-                                <p>{{video.description}}</p>
+                                <p>{{modalVideo.description}}</p>
                             </div>
                         </div>
                     </div>

@@ -1,7 +1,7 @@
-<div class="VideoWidgetReadOnly">
+<div class="VideoWidget">
     <h5>{{video.name}}</h5>
     <div class="VideoContainer">
         <img ng-src="images/video-poster.jpg">
     </div>
-    <ng-rate-it ng-model="video.rateit" resetable="false" step="1"></ng-rate-it>
+    <ng-rate-it ng-model="video.pristineRate" resetable="false" step="1" before-rated="on_before_rated" ng-click="$event.stopPropagation();" pristine="true"></ng-rate-it> <span class="GeneralRate">(General: {{generalRate() | number:2}})</span>
 </div>
