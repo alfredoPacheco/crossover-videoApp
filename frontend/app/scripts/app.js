@@ -40,4 +40,6 @@ angular.module('videosApp', [
 
     $httpProvider.interceptors.push('authInterceptorService');
 
+}).run(function(authService) {
+    authService.fillAuthData();
 });

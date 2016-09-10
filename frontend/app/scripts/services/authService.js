@@ -32,6 +32,7 @@ angular.module('videosApp').factory('authService', function($http, $q, localStor
         };
 
         var deferred = $q.defer();
+
         $http({
             method: 'POST',
             url: appConfig.API_URL + '/user/auth',
@@ -74,7 +75,9 @@ angular.module('videosApp').factory('authService', function($http, $q, localStor
         localStorageService.remove('authenticationData');
 
         _authentication.isAuth = false;
-        _authentication.userName = "";
+        _authentication.userName = '';
+
+        $rootScope.currentUser = '';
 
     };
 

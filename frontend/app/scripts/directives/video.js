@@ -37,13 +37,6 @@ function postLink(videoService, scope, element, attrs) {
         });
     };
     scope.generalRate = function() {
-        var video = scope.video;
-        if (video && video.ratings && video.ratings.length > 0) {
-            return video.ratings.reduce(function(oldValue, currentValue) {
-                return oldValue + currentValue;
-            }) / video.ratings.length;
-        } else {
-            return 0;
-        }
+        return videoService.generalRate(scope.video);
     }
 }

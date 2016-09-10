@@ -10,7 +10,7 @@
 angular.module('videosApp').service('userService', function(crudFactory) {
 
     var crudInstance = new crudFactory({
-        entityName: '',
+        entityName: '/user',
         catalogs: [],
         adapter: function() {
 

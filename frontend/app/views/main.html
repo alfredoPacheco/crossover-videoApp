@@ -7,9 +7,9 @@
     <div infinite-scroll="retrieveVideos()" infinite-scroll-distance=".3">
         <div class="row VideoItem">
             <div class="col-sm-4 col-lg-3" ng-repeat="video in videoList">
-                <div class="list-group">
+                <div class="list-group" ng-click="openModalVideo(video);">
                     <div class="list-group-item">
-                        <video-directive-readonly video="video" ng-click="openModalVideo(video);"></video-directive-readonly>
+                        <video-directive-readonly video="video"></video-directive-readonly>
                     </div>
                 </div>
             </div>

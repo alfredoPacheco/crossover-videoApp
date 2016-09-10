@@ -1,7 +1,7 @@
 Functional Requirements:
  ✔ Develop a single page application by using one of the allowed MVV* frameworks. @done (16-09-10 15:27)
  ☐ Design the UI, which should be motivated by the provided visuals.
- ☐ Implement user authentication. The content of this application should not be visible to public.
+ ✔ Implement user authentication. The content of this application should not be visible to public. @done (16-09-10 16:01)
  ✔ User should be able to see video listings on index page. Only first 10 videos should be loaded initially. @done (16-09-10 15:27)
  ✔ Lazy loading should be implemented i.e. More videos should appear as the user scrolls down the listing. @done (16-09-10 15:27)
  ☐ Users should not be able to play more than 1 video simultaneously. Playing a video should pause all other videos.
@@ -48,7 +48,7 @@ Backend:
         sessionId is to be sent with each request after login.
 
 
-    ☐ Logout:
+    ✔ Logout: @done (16-09-10 16:02)
       This API call is used to logout the user from application.
       Query string should contain the following parameters:
         sessionId
@@ -79,7 +79,7 @@ Backend:
 
 
 
-    ☐ Get Single Video:
+    ✔ Get Single Video: NOT NECESSARY @done (16-09-10 16:02)
       This API call is used to get details of a single video.
       Query string should contain the following parameters:
         sessionId

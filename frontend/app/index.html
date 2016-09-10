@@ -21,7 +21,7 @@
     <!-- endbuild -->
 </head>
 
-<body ng-app="videosApp">
+<body ng-app="videosApp" ng-controller="MainCtrl" ng-cloak>
     <!--[if lte IE 8]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -29,8 +29,16 @@
     <div class="header">
         <div class="navbar navbar-default navbar-fixed-top" role="navigation">
             <div class="container-fluid">
-                <div class="navbar-header">
+                <div class="navbar-header" style="width:100%;">
                     <a class="navbar-brand" href="#/">videos</a>
+                    <ul class="nav navbar-nav navbar-right" style="float:right;">
+                        <li class="dropdown" ng-show="currentUser">
+                            <a style="text-align:right;" href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span> <strong>{{currentUser}}</strong> <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="" ng-click="logout()" style="text-align:right;">Logout</a></li>
+                            </ul>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>

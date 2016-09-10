@@ -7,13 +7,13 @@
  * # MainCtrl
  * Controller of the videosApp
  */
-angular.module('videosApp').controller('MainCtrl', function($scope, videoService) {
-    
+angular.module('videosApp').controller('MainCtrl', function($scope, videoService, userService, authService, $location) {
+
     $scope.videoList = [];
     $scope.modalVideo = {};
-    
+
     var infiniteScrollAdd = 10;
-    
+
     $scope.retrieveVideos = function() {
 
         videoService.customGet('videos?limit=' + infiniteScrollAdd + '&skip=' + $scope.videoList.length).then(function(data) {
@@ -41,6 +41,13 @@ angular.module('videosApp').controller('MainCtrl', function($scope, videoService
 
     $scope.on_closeModal = function() {
         $scope.modalVideo = {};
+    };
+
+    $scope.logout = function() {
+        userService.customGet('logout').then(function(data) {
+            authService.logOut();
+            $location.path('/login');
+        });
     };
 
 });

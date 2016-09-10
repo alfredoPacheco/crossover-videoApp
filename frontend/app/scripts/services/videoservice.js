@@ -24,12 +24,24 @@ angular.module('videosApp').service('videoService', function(crudFactory, $sce, 
 
                 }
             };
+
+            theEntity.pristineRate = self.generalRate(theEntity);
         },
         adapterOut: function() {
 
         },
         dependencies: []
     });
+
+    crudInstance.generalRate = function(video) {
+        if (video && video.ratings && video.ratings.length > 0) {
+            return video.ratings.reduce(function(oldValue, currentValue) {
+                return oldValue + currentValue;
+            }) / video.ratings.length;
+        } else {
+            return 0;
+        }
+    };
 
     return crudInstance;
 });
