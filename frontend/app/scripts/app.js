@@ -17,7 +17,8 @@ angular.module('videosApp', [
     'infinite-scroll',
     'angular-md5',
     'com.2fdevs.videogular',
-    'com.2fdevs.videogular.plugins.controls'
+    'com.2fdevs.videogular.plugins.controls',
+    'ngRateIt'
 ], function($httpProvider) {
     // $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
     // $httpProvider.defaults.headers.put['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';

@@ -1,10 +1,7 @@
-<div class="VideoWidget">
+<div class="VideoWidgetReadOnly">
+    <h5>{{video.name}}</h5>
     <div class="VideoContainer">
-        <videogular vg-theme="video.videoConfig.theme">
-            <vg-media vg-src="video.videoConfig.sources" vg-tracks="video.videoConfig.tracks"></vg-media>
-            <vg-poster vg-url="images/video-poster.jpg"></vg-poster>
-        </videogular>
+        <img ng-src="images/video-poster.jpg">
     </div>
-    <div>RATE</div>
-    <h4>{{video.name}}</h4>
+    <ng-rate-it ng-model="video.rateit" resetable="false" step="1"></ng-rate-it>
 </div>
