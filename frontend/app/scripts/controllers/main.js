@@ -13,8 +13,29 @@ angular.module('videosApp').controller('MainCtrl', function($scope, videoService
     $scope.retrieveVideos = function() {
 
         videoService.customGet('videos?limit=' + infiniteScrollAdd).then(function(data) {
-            $scope.videoList = data;
-            infiniteScrollAdd += 1;
+            data.forEach(function(oVideoToAdd) {
+                var oVideoFound = $scope.videoList.find(function(oVideoAlreadyAdded) {
+                    return oVideoAlreadyAdded._id == oVideoToAdd._id;
+                });
+                if (!oVideoFound) {
+                    $scope.videoList.push(oVideoToAdd);
+                }
+            });
+            infiniteScrollAdd += 5;
         });
-    }
+    };
+
+    $scope.openModalVideo = function(video) {
+        $scope.video = video;
+        angular.element('#modal-video').modal('show');
+        angular.element('#modal-video').off('hidden.bs.modal').on('hidden.bs.modal', function(e) {
+            $scope.$apply(function() {
+                $scope.on_closeModal();
+            });
+        })
+    };
+
+    $scope.on_closeModal = function() {
+        $scope.video = null;
+    };
 });
