@@ -21,6 +21,8 @@ module.exports = function(config) {
     files: [
       // bower:js
       'bower_components/jquery/dist/jquery.js',
+      'bower_components/es5-shim/es5-shim.js',
+      'bower_components/es6-shim/es6-shim.js',
       'bower_components/angular/angular.js',
       'bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.js',
       'bower_components/angular-route/angular-route.js',

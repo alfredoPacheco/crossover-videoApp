@@ -1,6 +1,6 @@
 Functional Requirements:
  ✔ Develop a single page application by using one of the allowed MVV* frameworks. @done (16-09-10 15:27)
- ☐ Design the UI, which should be motivated by the provided visuals.
+ ✔ Design the UI, which should be motivated by the provided visuals. @done (16-09-10 20:51)
  ✔ Implement user authentication. The content of this application should not be visible to public. @done (16-09-10 16:01)
  ✔ User should be able to see video listings on index page. Only first 10 videos should be loaded initially. @done (16-09-10 15:27)
  ✔ Lazy loading should be implemented i.e. More videos should appear as the user scrolls down the listing. @done (16-09-10 15:27)
@@ -16,7 +16,7 @@ Non-Functional Requirements:
  ✔ Exception handling should be done, where necessary. @done (16-09-10 15:28)
  ✔ Code should be well organized into files and folders. @done (16-09-10 15:28)
  ✔ UI design should be clean and polished. @done (16-09-10 15:28)
- ☐ CSS animations should be used to make the application more appealing.
+ ✔ CSS animations should be used to make the application more appealing. @done (16-09-10 20:51)
  ☐ UI should be cross-browser compatible.
  ☐ UI should be cross-device compatible.
 
