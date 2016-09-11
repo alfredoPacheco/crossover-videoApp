@@ -32,6 +32,9 @@ module.exports = function(config) {
       'bower_components/videogular/videogular.js',
       'bower_components/videogular-controls/vg-controls.js',
       'bower_components/angular-rateit/dist/ng-rateit.js',
+      'bower_components/angular-animate/angular-animate.js',
+      'bower_components/gsap/src/uncompressed/TweenMax.js',
+      'bower_components/ngFx/dist/ngFx.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',

@@ -4,9 +4,9 @@
             Empty List
         </div>
     </div>
-    <div infinite-scroll="retrieveVideos()" infinite-scroll-distance=".3">
+    <div infinite-scroll="retrieveVideos()" infinite-scroll-distance="5">
         <div class="row VideoItem">
-            <div class="col-sm-4 col-lg-3" ng-repeat="video in videoList">
+            <div class="col-sm-4 col-lg-3 fx-zoom-down fx-speed-500" ng-repeat="video in videoList track by video._id">
                 <div class="list-group" ng-click="openModalVideo(video);">
                     <div class="list-group-item">
                         <video-directive-readonly video="video"></video-directive-readonly>
@@ -15,6 +15,7 @@
             </div>
         </div>
     </div>
+    <div style="height:300px"></div>
 </div>
 <div class="modal fade" id="modal-video">
     <div class="modal-dialog modal-lg">
@@ -30,7 +31,6 @@
                             <video-directive video="modalVideo"></video-directive>
                         </div>
                         <div class="col-sm-6">
-                            <div>RATE</div>
                             <div class="VideoDescription">
                                 <p>{{modalVideo.description}}</p>
                             </div>

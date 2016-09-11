@@ -3,6 +3,7 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
 @import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
 // endbower
 
+@import "theme-yeti";
 @import "VideoWidget";
 
 .browsehappy {
@@ -16,6 +17,8 @@ body {
   padding-top: 50px;
   padding-left: 10px;
   padding-right: 10px;
+  overflow-x: hidden;
+  background: white url(../images/bg.jpg) repeat left top;
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
@@ -28,7 +31,6 @@ body {
 
 /* Custom page header */
 .header {
-  border-bottom: 1px solid #e5e5e5;
   margin-bottom: 10px;
 
   /* Make the masthead heading the same height as the navigation */
@@ -92,4 +94,8 @@ body {
   .jumbotron {
     border-bottom: 0;
   }
+}
+
+.navbar {
+  box-shadow: 0 0 30px 7px rgb(80,80,80);
 }
