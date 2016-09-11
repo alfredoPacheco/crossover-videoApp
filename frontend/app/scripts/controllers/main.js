@@ -44,6 +44,7 @@ angular.module('videosApp').controller('MainCtrl', function($scope, videoService
     };
 
     $scope.on_closeModal = function() {
+        $scope.$broadcast('CloseVideo')
         $scope.modalVideo = {};
     };
 

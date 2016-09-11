@@ -28,6 +28,7 @@ angular.module('videosApp').directive('videoDirective', function(videoService) {
 
 
 function postLink(videoService, scope, element, attrs) {
+
     scope.on_before_rated = function(rateValue) {
         return videoService.customPost('video/ratings', {
             videoId: scope.video._id,
@@ -36,7 +37,19 @@ function postLink(videoService, scope, element, attrs) {
             scope.video.ratings = updatedVideo.ratings;
         });
     };
+
     scope.generalRate = function() {
         return videoService.generalRate(scope.video);
-    }
+    };
+
+    scope.$on('CloseVideo', function() {
+        if (scope.videoAPI) {
+            scope.videoAPI.pause();
+        }
+    });
+
+    scope.videoAPI = null;
+    scope.on_player_ready = function(videoAPI) {
+        scope.videoAPI = videoAPI;
+    };
 }

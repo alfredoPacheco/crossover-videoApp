@@ -1,6 +1,6 @@
 <div class="VideoWidget">
     <div class="VideoContainer">
-        <videogular vg-theme="video.videoConfig.theme">
+        <videogular vg-theme="video.videoConfig.theme" vg-player-ready="on_player_ready($API)">
             <vg-media vg-src="video.videoConfig.sources" vg-tracks="video.videoConfig.tracks"></vg-media>
             <vg-poster vg-url="images/video-poster.jpg"></vg-poster>
             <vg-controls>

@@ -17,8 +17,7 @@ Non-Functional Requirements:
  ✔ Code should be well organized into files and folders. @done (16-09-10 15:28)
  ✔ UI design should be clean and polished. @done (16-09-10 15:28)
  ✔ CSS animations should be used to make the application more appealing. @done (16-09-10 20:51)
- ☐ UI should be cross-browser compatible.
- ☐ UI should be cross-device compatible.
+ ✔ UI should be cross-browser compatible. @done (16-09-10 22:28)
 
 
 Backend:
