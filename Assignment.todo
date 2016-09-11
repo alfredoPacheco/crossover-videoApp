@@ -4,7 +4,7 @@ Functional Requirements:
  ✔ Implement user authentication. The content of this application should not be visible to public. @done (16-09-10 16:01)
  ✔ User should be able to see video listings on index page. Only first 10 videos should be loaded initially. @done (16-09-10 15:27)
  ✔ Lazy loading should be implemented i.e. More videos should appear as the user scrolls down the listing. @done (16-09-10 15:27)
- ☐ Users should not be able to play more than 1 video simultaneously. Playing a video should pause all other videos.
+ ✔ Users should not be able to play more than 1 video simultaneously. Playing a video should pause all other videos. @done (16-09-10 22:48)
  ✔ Users should be able to rate videos, an overall rating for each video should also be displayed. @done (16-09-10 15:28)
  ✔ Users should be able to open the video details page by clicking on video title. @done (16-09-10 15:28)
  ✔ REST API should be consumed. @done (16-09-10 15:28)
@@ -27,7 +27,7 @@ Backend:
   ✔ Run ‘npm install’ to download npm packages. @done (16-09-10 15:29)
   ✔ Run ‘npm start’ to start the backend API. @done (16-09-10 15:30)
   ✔ By Default the backend will start web server on http://localhost:3000/ @done (16-09-10 15:30)
-  ☐ Backend is designed to serve your client code. Simply copy your code inside the client folder, and your app would be accessible at root ’/ ‘ (with default configuration the URL will be http://localhost:3000/)
+  ✔ Backend is designed to serve your client code. Simply copy your code inside the client folder, and your app would be accessible at root ’/ ‘ (with default configuration the URL will be http://localhost:3000/) @done (16-09-11 01:03)
 
 
     ✔ Authenticate: @done (16-09-10 15:31)
@@ -126,8 +126,8 @@ To be evaluated :
     ✔ Easy to use @done (16-09-10 15:33)
     ✔ Attractive @done (16-09-10 15:33)
     ✔ UI responsiveness from Mobile to tablet to desktop. @done (16-09-10 15:33)
-    ☐ Cross-Browser Compatible (IE+10 is sufficient)
-    ☐ Creativity in applying interactivity particularly in animation
+    ✔ Cross-Browser Compatible (IE+10 is sufficient) @done (16-09-10 22:50)
+    ✔ Creativity in applying interactivity particularly in animation @done (16-09-11 01:03)
   ☐ Requirement Fulfillment. 
   ☐ Recorded Demo (mandatory)
   

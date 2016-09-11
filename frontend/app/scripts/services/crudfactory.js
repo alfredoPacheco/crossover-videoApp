@@ -7,7 +7,7 @@
  * # crudFactory
  * Factory in the videosApp.
  */
-angular.module('videosApp').factory('crudFactory', function($http, $q, appConfig, $timeout, $log) {
+angular.module('videosApp').factory('CrudFactory', function($http, $q, appConfig, $timeout, $log) {
 
     var log = $log;
 
@@ -19,7 +19,7 @@ angular.module('videosApp').factory('crudFactory', function($http, $q, appConfig
         };
         this.getById = function(theId) {
             for (var i = 0; i < this._arrAllRecords.length; i++) {
-                if (theId == this._arrAllRecords[i].id) {
+                if (theId === this._arrAllRecords[i].id) {
                     return this._arrAllRecords[i];
                 }
             }
@@ -28,7 +28,7 @@ angular.module('videosApp').factory('crudFactory', function($http, $q, appConfig
                 value: ''
             };
         };
-    };
+    }
 
     function ClassEntity(oConfig) {
         ////////////////////////////////////////////////////////INIT CONFIG
@@ -42,7 +42,7 @@ angular.module('videosApp').factory('crudFactory', function($http, $q, appConfig
             _validate = function() {
                 return true;
             };
-        };
+        }
 
         var _defaults = oConfig.defaults;
         if (!_defaults) {
@@ -70,23 +70,23 @@ angular.module('videosApp').factory('crudFactory', function($http, $q, appConfig
             var oNewEntity = {};
 
             //System Fields
-            for (var prop in _entityDefinition.systemFields) {
-                if (_entityDefinition.systemFields.hasOwnProperty(prop)) {
-                    oNewEntity[prop] = getDefaultValueForType(_entityDefinition.systemFields[prop], prop);
+            for (var propSystemField in _entityDefinition.systemFields) {
+                if (_entityDefinition.systemFields.hasOwnProperty(propSystemField)) {
+                    oNewEntity[propSystemField] = getDefaultValueForType(_entityDefinition.systemFields[propSystemField], propSystemField);
                 }
             }
 
             //Optional Fields
-            for (var prop in _entityDefinition.optionalFields) {
-                if (_entityDefinition.optionalFields.hasOwnProperty(prop)) {
-                    oNewEntity[prop] = getDefaultValueForType(_entityDefinition.optionalFields[prop], prop);
+            for (var propOptionalField in _entityDefinition.optionalFields) {
+                if (_entityDefinition.optionalFields.hasOwnProperty(propOptionalField)) {
+                    oNewEntity[propOptionalField] = getDefaultValueForType(_entityDefinition.optionalFields[propOptionalField], propOptionalField);
                 }
             }
 
             //Required Fields
-            for (var prop in _entityDefinition.requiredFields) {
-                if (_entityDefinition.requiredFields.hasOwnProperty(prop)) {
-                    oNewEntity[prop] = getDefaultValueForType(_entityDefinition.requiredFields[prop], prop);
+            for (var propRequiredField in _entityDefinition.requiredFields) {
+                if (_entityDefinition.requiredFields.hasOwnProperty(propRequiredField)) {
+                    oNewEntity[propRequiredField] = getDefaultValueForType(_entityDefinition.requiredFields[propRequiredField], propRequiredField);
                 }
             }
 
@@ -107,26 +107,26 @@ angular.module('videosApp').factory('crudFactory', function($http, $q, appConfig
             return oNewEntity;
         };
 
-        var _getProgress = function(theEntity) {
-            return validatorService.getProgress(theEntity, _entityDefinition.requiredFields);
-        };
+        // var _getProgress = function(theEntity) {
+        //     return validatorService.getProgress(theEntity, _entityDefinition.requiredFields);
+        // };
 
         return {
             entityName: _entityName,
             parentField: _parentField,
             seedField: _seedField,
             create: _create,
-            getProgress: _getProgress,
+            // getProgress: _getProgress,
             defaults: _defaults,
             validate: _validate,
             adapterIn: _adapterIn,
             adapterOut: _adapterOut
         };
-    };
+    }
 
 
 
-    var getDefaultValueForType = function(sType, prop) {
+    var getDefaultValueForType = function(sType) { //, prop) {
         var result;
         switch (sType) {
             case 'catalog':
@@ -164,39 +164,39 @@ angular.module('videosApp').factory('crudFactory', function($http, $q, appConfig
     };
 
     var _mainConfig;
-    var createChildEntity = function(sProperty) {
-        var result = null;
-        if (_mainConfig && _mainConfig.entityDefinition) {
-            _mainConfig.entityDefinition;
+    // var createChildEntity = function(sProperty) {
+    //     var result = null;
+    //     if (_mainConfig && _mainConfig.entityDefinition) {
+    //         // _mainConfig.entityDefinition;
 
-            //System Fields
-            for (var prop in _entityDefinition.systemFields) {
-                if (_entityDefinition.systemFields.hasOwnProperty(prop)) {
-                    oNewEntity[prop] = getDefaultValueForType(_entityDefinition.systemFields[prop], prop);
-                }
-            }
+    //         //System Fields
+    //         for (var prop in _entityDefinition.systemFields) {
+    //             if (_entityDefinition.systemFields.hasOwnProperty(prop)) {
+    //                 oNewEntity[prop] = getDefaultValueForType(_entityDefinition.systemFields[prop], prop);
+    //             }
+    //         }
 
-            //Optional Fields
-            for (var prop in _entityDefinition.optionalFields) {
-                if (_entityDefinition.optionalFields.hasOwnProperty(prop)) {
-                    oNewEntity[prop] = getDefaultValueForType(_entityDefinition.optionalFields[prop], prop);
-                }
-            }
+    //         //Optional Fields
+    //         for (var propOpt in _entityDefinition.optionalFields) {
+    //             if (_entityDefinition.optionalFields.hasOwnProperty(propOpt)) {
+    //                 oNewEntity[propOpt] = getDefaultValueForType(_entityDefinition.optionalFields[propOpt], propOpt);
+    //             }
+    //         }
 
-            //Required Fields
-            for (var prop in _entityDefinition.requiredFields) {
-                if (_entityDefinition.requiredFields.hasOwnProperty(prop)) {
-                    oNewEntity[prop] = getDefaultValueForType(_entityDefinition.requiredFields[prop], prop);
-                }
-            }
-
-
+    //         //Required Fields
+    //         for (var propRequired in _entityDefinition.requiredFields) {
+    //             if (_entityDefinition.requiredFields.hasOwnProperty(propRequired)) {
+    //                 oNewEntity[propRequired] = getDefaultValueForType(_entityDefinition.requiredFields[propRequired], propRequired);
+    //             }
+    //         }
 
 
 
-        }
-        var result = new ClassEntity(oConfig);
-    };
+
+
+    //     }
+    //     // var result = new ClassEntity(oConfig);
+    // };
 
     return function(oMainConfig) {
         _mainConfig = oMainConfig;
@@ -219,7 +219,7 @@ angular.module('videosApp').factory('crudFactory', function($http, $q, appConfig
         var _arrDependenciesAndThis = angular.copy(oMainConfig.dependencies); //almost at the end of the file we add "This"
         var _adapterOut = oMainConfig.adapterOut;
         if (!_adapterOut) {
-            _adapterOut = function(oEntity, self) {
+            _adapterOut = function(oEntity) { //, self) {
                 return oEntity;
             };
         }
@@ -240,11 +240,11 @@ angular.module('videosApp').factory('crudFactory', function($http, $q, appConfig
 
         var _adapt = function(entity) {
             return _populateCatalogValues(_adapter(entity, _self));
-        }
+        };
 
         var _getById = function(theId) {
             for (var i = 0; i < _arrAllRecords.length; i++) {
-                if (theId == _arrAllRecords[i].id) {
+                if (theId === _arrAllRecords[i].id) {
                     return _populateCatalogValues(_adapter(_arrAllRecords[i], _self));
                 }
             }
@@ -254,7 +254,7 @@ angular.module('videosApp').factory('crudFactory', function($http, $q, appConfig
         var _getByParentId = function(theParentId) {
             var result = [];
             for (var i = 0; i < _arrAllRecords.length; i++) {
-                if (theParentId == _arrAllRecords[i][mainEntity.parentField]) {
+                if (theParentId === _arrAllRecords[i][mainEntity.parentField]) {
                     result.push(_populateCatalogValues(_adapter(_arrAllRecords[i], _self)));
                 }
             }
@@ -263,7 +263,7 @@ angular.module('videosApp').factory('crudFactory', function($http, $q, appConfig
 
         var _getSingleByParentId = function(theParentId) {
             for (var i = 0; i < _arrAllRecords.length; i++) {
-                if (theParentId == _arrAllRecords[i][mainEntity.parentField]) {
+                if (theParentId === _arrAllRecords[i][mainEntity.parentField]) {
                     return _populateCatalogValues(_adapter(_arrAllRecords[i], _self));
                 }
             }
@@ -272,7 +272,7 @@ angular.module('videosApp').factory('crudFactory', function($http, $q, appConfig
 
         var _getRecursiveBySeedId = function(theSeedId) {
             for (var i = 0; i < _arrAllRecords.length; i++) {
-                if (theSeedId == _arrAllRecords[i][mainEntity.seedField]) {
+                if (theSeedId === _arrAllRecords[i][mainEntity.seedField]) {
                     return _populateCatalogValues(_adapter(_arrAllRecords[i], _self));
                 }
             }
@@ -288,7 +288,7 @@ angular.module('videosApp').factory('crudFactory', function($http, $q, appConfig
 
         var _save = function(theEntity, theArrayBelonging, theParameters) {
             var deferred = $q.defer();
-            if (theParameters === undefined || theParameters == null) {
+            if (theParameters === undefined || theParameters === null) {
                 theParameters = '';
             }
 
@@ -399,7 +399,7 @@ angular.module('videosApp').factory('crudFactory', function($http, $q, appConfig
         };
         var _remove = function(theEntity, theArrayBelonging, theParameters) {
             var deferred = $q.defer();
-            if (theParameters === undefined || theParameters == null) {
+            if (theParameters === undefined || theParameters === null) {
                 theParameters = '';
             }
 
@@ -409,15 +409,15 @@ angular.module('videosApp').factory('crudFactory', function($http, $q, appConfig
                         var backendResponse = response.data;
                         if (!backendResponse.ErrorThrown) {
                             for (var i = 0; i < _arrAllRecords.length; i++) {
-                                if (_arrAllRecords[i].id == theEntity.id) {
+                                if (_arrAllRecords[i].id === theEntity.id) {
                                     _arrAllRecords.splice(i, 1);
                                     break;
                                 }
                             }
                             if (angular.isArray(theArrayBelonging)) {
-                                for (var i = 0; i < theArrayBelonging.length; i++) {
-                                    if (theArrayBelonging[i].id == theEntity.id) {
-                                        theArrayBelonging.splice(i, 1);
+                                for (var j = 0; j < theArrayBelonging.length; j++) {
+                                    if (theArrayBelonging[j].id === theEntity.id) {
+                                        theArrayBelonging.splice(j, 1);
                                         break;
                                     }
                                 }
@@ -469,21 +469,21 @@ angular.module('videosApp').factory('crudFactory', function($http, $q, appConfig
                 var oEntity = arrItemsToRemove[j];
                 var promise = _remove(oEntity, arrEntities, theParameters);
                 promises.push(promise);
-            };
+            }
 
             return $q.all(promises);
         };
 
         var _loadEntity = function(id, qParams) {
             var deferred = $q.defer();
-            if (qParams === undefined || qParams == null) {
+            if (qParams === undefined || qParams === null) {
                 qParams = '?';
             }
             if (id > 0) {
                 $http.get(appConfig.API_URL + mainEntity.entityName + '/' + id + qParams + '&noCache=' + Number(new Date()))
                     .success(function(data) {
                         var backendResponse = data;
-                        if (backendResponse.status == 'error') {
+                        if (backendResponse.status === 'error') {
                             var alertifyContent = '<div style="word-wrap: break-word;">' + backendResponse.ResponseDescription + '</div>';
                             alertify.alert(alertifyContent).set('modal', true);
                             log.debug(data);
@@ -503,7 +503,7 @@ angular.module('videosApp').factory('crudFactory', function($http, $q, appConfig
                         // something went wrong
                         alertify.alert(data).set('modal', true);
                         log.debug(data);
-                        deferred.reject(backendResponse.data);
+                        deferred.reject(data);
                     });
             } else {
                 deferred.reject();
@@ -515,11 +515,12 @@ angular.module('videosApp').factory('crudFactory', function($http, $q, appConfig
 
         var _loadEntitiesExecuted = false;
         var _loadCatalogsExecuted = false;
-        var _loadDependenciesExecuted = false;
 
         var _loadEntities = function(bForce) {
             var deferred = $q.defer();
-            if (bForce) _loadEntitiesExecuted = false;
+            if (bForce) {
+                _loadEntitiesExecuted = false;
+            }
             if (_loadEntitiesExecuted) {
                 deferred.resolve(_arrAllRecords);
             } else {
@@ -528,7 +529,7 @@ angular.module('videosApp').factory('crudFactory', function($http, $q, appConfig
                 $http.get(appConfig.API_URL + mainEntity.entityName + '?noCache=' + Number(new Date()))
                     .success(function(data) {
                         var backendResponse = data;
-                        if (backendResponse.status == 'error') {
+                        if (backendResponse.status === 'error') {
                             var alertifyContent = '<div style="word-wrap: break-word;">' + backendResponse.ResponseDescription + '</div>';
                             alertify.alert(alertifyContent).set('modal', true);
                             log.debug(data);
@@ -537,7 +538,7 @@ angular.module('videosApp').factory('crudFactory', function($http, $q, appConfig
                             _arrAllRecords = backendResponse.data;
                             for (var i = 0; i < _arrAllRecords.length; i++) {
                                 mainEntity.adapterIn(_arrAllRecords[i]);
-                            };
+                            }
                             _loadEntitiesExecuted = true;
                             deferred.resolve(data);
 
@@ -557,7 +558,9 @@ angular.module('videosApp').factory('crudFactory', function($http, $q, appConfig
 
         var _loadCatalogs = function(bForce) {
             var deferred = $q.defer();
-            if (bForce) _loadCatalogsExecuted = false;
+            if (bForce) {
+                _loadCatalogsExecuted = false;
+            }
             if (_loadCatalogsExecuted) {
                 deferred.resolve();
             } else {
@@ -573,10 +576,10 @@ angular.module('videosApp').factory('crudFactory', function($http, $q, appConfig
                     $http.get(appConfig.API_URL + mainEntity.entityName + '/getCatalogs' + '?noCache=' + Number(new Date()))
                         .success(function(data) {
                             var backendResponse = data;
-                            if (backendResponse.status == 'error') {
+                            if (backendResponse.status === 'error') {
                                 var alertifyContent = '<div style="word-wrap: break-word;">' + backendResponse.ResponseDescription + '</div>';
                                 alertify.alert(alertifyContent).set('modal', true);
-                                log.debug(response);
+                                log.debug(data);
                                 deferred.reject(data);
                             } else {
                                 for (var catalog in _catalogs) {
@@ -636,7 +639,7 @@ angular.module('videosApp').factory('crudFactory', function($http, $q, appConfig
                     /*success*/
                     function(response) {
                         var backendResponse = response.data;
-                        if (backendResponse.status == 'error') {
+                        if (backendResponse.status === 'error') {
                             var alertifyContent = '<div style="word-wrap: break-word;">' + backendResponse.ResponseDescription + '</div>';
                             alertify.alert(alertifyContent).set('modal', true);
                             deferred.reject(response);
@@ -666,12 +669,12 @@ angular.module('videosApp').factory('crudFactory', function($http, $q, appConfig
                     /*success*/
                     function(response) {
                         var backendResponse = response.data;
-                        if (backendResponse.status == 'error') {
+                        if (backendResponse.status === 'error') {
                             var alertifyContent = '<div style="word-wrap: break-word;">' + backendResponse.ResponseDescription + '</div>';
                             alertify.alert(alertifyContent).set('modal', true);
                             deferred.reject(response);
                         } else {
-                            if (backendResponse.data != null) {
+                            if (backendResponse.data !== null) {
                                 mainEntity.adapterIn(backendResponse.data);
                                 var oEntity = _getById(backendResponse.data.id);
                                 if (oEntity) { //Already exists, lets updated it.
@@ -700,7 +703,7 @@ angular.module('videosApp').factory('crudFactory', function($http, $q, appConfig
                 .then(function(response) {
                     if (typeof response.data === 'object') {
                         var backendResponse = response.data;
-                        if (backendResponse.status == 'error') {
+                        if (backendResponse.status === 'error') {
                             alertify.error(backendResponse.ResponseDescription);
                             log.debug(response);
                             deferred.reject(backendResponse);
@@ -731,7 +734,7 @@ angular.module('videosApp').factory('crudFactory', function($http, $q, appConfig
                 .then(function(response) {
                     if (typeof response.data === 'object') {
                         var backendResponse = response.data;
-                        if (backendResponse.status == 'error') {
+                        if (backendResponse.status === 'error') {
                             var alertifyContent = '<div style="word-wrap: break-word;">' + backendResponse.ResponseDescription + '</div>';
                             alertify.alert(alertifyContent).set('modal', true);
                             log.debug(response);
@@ -768,7 +771,7 @@ angular.module('videosApp').factory('crudFactory', function($http, $q, appConfig
                 .then(function(response) {
                     if (typeof response.data === 'object') {
                         var backendResponse = response.data;
-                        if (backendResponse.status == 'error') {
+                        if (backendResponse.status === 'error') {
                             var alertifyContent = '<div style="word-wrap: break-word;">' + backendResponse.ResponseDescription + '</div>';
                             alertify.alert(alertifyContent).set('modal', true);
                             log.debug(response);
@@ -825,7 +828,7 @@ angular.module('videosApp').factory('crudFactory', function($http, $q, appConfig
                 .then(function(response) {
                     if (typeof response.data === 'object') {
                         var backendResponse = response.data;
-                        if (backendResponse.status == 'error') {
+                        if (backendResponse.status === 'error') {
                             log.debug(backendResponse);
                             deferred.reject(backendResponse);
                         } else {
@@ -866,7 +869,7 @@ angular.module('videosApp').factory('crudFactory', function($http, $q, appConfig
                 .then(function(response) {
                     if (typeof response.data === 'object') {
                         var backendResponse = response.data;
-                        if (backendResponse.status == 'error') {
+                        if (backendResponse.status === 'error') {
                             log.debug(backendResponse);
                             deferred.reject(backendResponse);
                         } else {
@@ -888,7 +891,7 @@ angular.module('videosApp').factory('crudFactory', function($http, $q, appConfig
             return deferred.promise;
         };
 
-        var _addToParent = function(parentType, parentId, theEntity, theArrayBelonging) {
+        var _addToParent = function(parentType, parentId, theEntity) {
             var deferred = $q.defer();
 
             if (mainEntity.validate(theEntity)) {

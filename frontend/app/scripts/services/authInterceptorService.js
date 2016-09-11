@@ -15,26 +15,13 @@ angular.module('videosApp').factory('authInterceptorService', function($q, $loca
         config.params = config.params || {};
         var authData = localStorageService.get('authenticationData');
         if (authData) {
-            switch (config.method) {
-                case 'GET':
-                    switch (config.url) {
-                        case appConfig.API_URL + '/videos':
-                            config.params.sessionId = authData.sessionId;
-                        default:
-                            config.params = {};
-                            break;
-                    }
-                case 'POST':
-                    config.params.sessionId = authData.sessionId;
-                    break;
-                default:
-                    config.params = {};
-                    break;
+            if ((new RegExp(appConfig.API_URL)).test(config.url)) {
+                config.params.sessionId = authData.sessionId;
             }
         }
 
         return config;
-    }
+    };
 
     var _responseError = function(rejection) {
         if (rejection.status === 401) {
@@ -42,7 +29,7 @@ angular.module('videosApp').factory('authInterceptorService', function($q, $loca
             $location.path('/login');
         }
         return $q.reject(rejection);
-    }
+    };
 
     authInterceptorServiceFactory.request = _request;
     authInterceptorServiceFactory.responseError = _responseError;

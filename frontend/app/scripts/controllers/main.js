@@ -21,7 +21,7 @@ angular.module('videosApp').controller('MainCtrl', function($scope, videoService
             videoService.customGet('videos?limit=' + infiniteScrollAdd + '&skip=' + videosToAdd.length).then(function(data) {
                 data.forEach(function(oVideoToAdd) {
                     var oVideoFound = videosToAdd.find(function(oVideoAlreadyAdded) {
-                        return oVideoAlreadyAdded._id == oVideoToAdd._id;
+                        return oVideoAlreadyAdded._id === oVideoToAdd._id;
                     });
                     if (!oVideoFound) {
                         videosToAdd.push(oVideoToAdd);
@@ -36,20 +36,20 @@ angular.module('videosApp').controller('MainCtrl', function($scope, videoService
     $scope.openModalVideo = function(video) {
         $scope.modalVideo = video;
         angular.element('#modal-video').modal('show');
-        angular.element('#modal-video').off('hidden.bs.modal').on('hidden.bs.modal', function(e) {
+        angular.element('#modal-video').off('hidden.bs.modal').on('hidden.bs.modal', function() {
             $scope.$apply(function() {
-                $scope.on_closeModal();
+                $scope.onCloseModal();
             });
-        })
+        });
     };
 
-    $scope.on_closeModal = function() {
-        $scope.$broadcast('CloseVideo')
+    $scope.onCloseModal = function() {
+        $scope.$broadcast('CloseVideo');
         $scope.modalVideo = {};
     };
 
     $scope.logout = function() {
-        userService.customGet('logout').then(function(data) {
+        userService.customGet('logout').then(function() {
             authService.logOut();
             $location.path('/login');
         });
@@ -68,7 +68,7 @@ angular.module('videosApp').controller('MainCtrl', function($scope, videoService
         if (oVideoToAdd) {
 
             var oVideoFound = $scope.videoList.find(function(oVideoAlreadyAdded) {
-                return oVideoAlreadyAdded._id == oVideoToAdd._id;
+                return oVideoAlreadyAdded._id === oVideoToAdd._id;
             });
             if (!oVideoFound) {
                 $timeout(function() {

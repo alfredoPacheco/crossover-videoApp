@@ -1,6 +1,8 @@
 {
-  "requireCamelCaseOrUpperCaseIdentifiers": true,
-  "requireCapitalizedConstructors": true,
-  "requireParenthesesAroundIIFE": true,
-  "validateQuoteMarks": "'"
+  // "requireCamelCaseOrUpperCaseIdentifiers": {
+  // 	"ignoreProperties": true
+  // },
+  // "requireCapitalizedConstructors": false,
+  "requireParenthesesAroundIIFE": true
+  // "validateQuoteMarks": "'"
 }

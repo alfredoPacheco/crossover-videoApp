@@ -7,9 +7,9 @@
  * # userService
  * Service in the videosApp.
  */
-angular.module('videosApp').service('userService', function(crudFactory) {
+angular.module('videosApp').service('userService', function(CrudFactory) {
 
-    var crudInstance = new crudFactory({
+    var crudInstance = new CrudFactory({
         entityName: '/user',
         catalogs: [],
         adapter: function() {

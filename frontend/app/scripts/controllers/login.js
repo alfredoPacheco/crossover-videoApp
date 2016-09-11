@@ -18,7 +18,7 @@ angular.module('videosApp').controller('LoginCtrl', function($scope, $activityIn
 
     $scope.login = function() {
         $scope.message = '';
-        authService.login($scope.loginData).then(function(data) {
+        authService.login($scope.loginData).then(function() {
             $location.path('/');
         }, function(data) {
             $scope.message = data;

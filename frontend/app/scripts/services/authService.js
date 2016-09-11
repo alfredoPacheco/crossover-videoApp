@@ -42,7 +42,7 @@ angular.module('videosApp').factory('authService', function($http, $q, localStor
         // $http.post(appConfig.API_URL + 'user/auth', loginData)
         .then(function(response) {
 
-            if (response.data.status == 'error') {
+            if (response.data.status === 'error') {
                 deferred.reject(response.data.error);
 
             } else {
@@ -60,7 +60,7 @@ angular.module('videosApp').factory('authService', function($http, $q, localStor
             }
 
 
-        }, function(err, status) {
+        }, function(err) {
             _logOut();
             deferred.reject(err);
         });
@@ -89,7 +89,7 @@ angular.module('videosApp').factory('authService', function($http, $q, localStor
             _authentication.userName = authData.userName;
             $rootScope.currentUser = _authentication.userName;
         }
-    }
+    };
 
     authServiceFactory.saveRegistration = _saveRegistration;
     authServiceFactory.login = _login;

@@ -1,33 +1,6 @@
 'use strict';
 
-/**
- * @ngdoc directive
- * @name iqsApp.directive:videoDirective
- * @description
- * # videoDirective
- */
-angular.module('videosApp').directive('videoDirective', function(videoService) {
-    return {
-        restrict: 'E',
-        templateUrl: 'views/videoDirective.html',
-        scope: {
-            video: "="
-        },
-        link: postLink.bind(this, videoService)
-    };
-}).directive('videoDirectiveReadonly', function(videoService) {
-    return {
-        restrict: 'E',
-        templateUrl: 'views/videoDirectiveReadonly.html',
-        scope: {
-            video: "="
-        },
-        link: postLink.bind(this, videoService)
-    };
-});
-
-
-function postLink(videoService, scope, element, attrs) {
+function postLink(videoService, scope) {
 
     scope.on_before_rated = function(rateValue) {
         return videoService.customPost('video/ratings', {
@@ -53,3 +26,29 @@ function postLink(videoService, scope, element, attrs) {
         scope.videoAPI = videoAPI;
     };
 }
+
+/**
+ * @ngdoc directive
+ * @name iqsApp.directive:videoDirective
+ * @description
+ * # videoDirective
+ */
+angular.module('videosApp').directive('videoDirective', function(videoService) {
+    return {
+        restrict: 'E',
+        templateUrl: 'views/videoDirective.html',
+        scope: {
+            video: "="
+        },
+        link: postLink.bind(this, videoService)
+    };
+}).directive('videoDirectiveReadonly', function(videoService) {
+    return {
+        restrict: 'E',
+        templateUrl: 'views/videoDirectiveReadonly.html',
+        scope: {
+            video: "="
+        },
+        link: postLink.bind(this, videoService)
+    };
+});

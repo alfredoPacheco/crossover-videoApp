@@ -7,9 +7,9 @@
  * # videoService
  * Service in the videosApp.
  */
-angular.module('videosApp').service('videoService', function(crudFactory, $sce, appConfig) {
+angular.module('videosApp').service('videoService', function(CrudFactory, $sce, appConfig) {
 
-    var crudInstance = new crudFactory({
+    var crudInstance = new CrudFactory({
         entityName: '',
         catalogs: [],
         adapter: function(theEntity, self) {
